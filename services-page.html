@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services & Process - TechForge Consulting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1f36;
+            --secondary: #0066ff;
+            --tertiary: #00d4aa;
+            --bg-light: #fafafa;
+            --gray-light: #f5f5f7;
+            --gray-medium: #86868b;
+            --white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-blue: rgba(0, 102, 255, 0.2);
+        }
+
+        [data-theme="dark"] {
+            --primary: #ffffff;
+            --bg-light: #0a0a0a;
+            --gray-light: #1a1a1a;
+            --white: #1a1f36;
+            --glass-bg: rgba(26, 31, 54, 0.1);
+            --glass-border: rgba(26, 31, 54, 0.2);
+            --shadow-light: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+            background: var(--bg-light);
+            color: var(--primary);
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px var(--shadow-light);
+        }
+
+        [data-theme="dark"] nav {
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary), var(--tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            width: 50px;
+            height: 24px;
+            background: var(--gray-medium);
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .theme-toggle::after {
+            content: '🌙';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            transition: left 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        [data-theme="dark"] .theme-toggle::after {
+            content: '☀️';
+            left: 29px;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, var(--bg-light) 0%, rgba(0, 102, 255, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            color: var(--gray-medium);
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: var(--gray-medium);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--secondary);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray-medium);
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .quick-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .quick-link {
+            padding: 0.75rem 1.5rem;
+            background: var(--white);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .quick-link:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--shadow-blue);
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .circuit-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            height: 1px;
+            animation: flow 10s linear infinite;
+        }
+
+        @keyframes flow {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 5%;
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-categories {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 1rem 1.5rem;
+            background: var(--white);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--tertiary));
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .category-tab:hover::before,
+        .category-tab.active::before {
+            width: 100%;
+        }
+
+        .category-tab.active {
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        .category-tab:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--shadow-blue);
+        }
+
+        .category-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .category-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(0, 102, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px var(--shadow-blue);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary), var(--tertiary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: var(--gray-medium);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .service-price {
+            color: var(--tertiary);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .service-timeline {
+            color: var(--gray-medium);
+            font-size: 0.875rem;
+        }
+
+        .tech-badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-badge {
+            padding: 0.25rem 0.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--secondary);
+        }
+
+        .service-expanded {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            margin-top: 1rem;
+        }
+
+        .service-card.expanded .service-expanded {
+            max-height: 500px;
+        }
+
+        /* Process Timeline */
+        .process {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--gray-light) 0%, var(--bg-light) 100%);
+        }
+
+        .timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--secondary), var(--tertiary));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+            opacity: 0;
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px var(--shadow-blue);
+        }
+
+        .timeline-point {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border: 3px solid var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-point {
+            background: var(--secondary);
+            transform: translateX(-50%) scale(1.2);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-duration {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(135deg, var(--secondary), var(--tertiary));
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .timeline-details {
+            margin-top: 1rem;
+            color: var(--gray-medium);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .timeline-content.expanded .timeline-details {
+            max-height: 300px;
+        }
+
+        .timeline-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-details li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-details li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--tertiary);
+            font-weight: bold;
+        }
+
+        /* Metrics Section */
+        .metrics {
+            padding: 5rem 5%;
+            background: var(--bg-light);
+        }
+
+        .metrics-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px var(--shadow-blue);
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary), var(--tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--gray-medium);
+            font-size: 1rem;
+        }
+
+        .metric-progress {
+            width: 100%;
+            height: 8px;
+            background: var(--gray-light);
+            border-radius: 10px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .metric-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--tertiary));
+            border-radius: 10px;
+            animation: fillProgress 2s ease;
+        }
+
+        @keyframes fillProgress {
+            from {
+                width: 0;
+            }
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--gray-light) 100%);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 10px 30px var(--shadow-blue);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--glass-bg);
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            color: var(--gray-medium);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--secondary), var(--tertiary));
+            color: white;
+        }
+
+        .cta-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: white;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group select option {
+            background: var(--primary);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: white;
+            color: var(--secondary);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .response-time {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        /* Floating Elements */
+        .floating-calculator {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            z-index: 100;
+            transition: all 0.3s ease;
+            transform: translateX(400px);
+        }
+
+        .floating-calculator.active {
+            transform: translateX(0);
+        }
+
+        .calculator-toggle {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary), var(--tertiary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px var(--shadow-blue);
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+
+        .calculator-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px var(--shadow-blue);
+            z-index: 100;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .chat-bubble:hover {
+            transform: scale(1.1);
+        }
+
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--tertiary));
+            z-index: 999;
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                margin-left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 30px;
+            }
+
+            .timeline-point {
+                left: 30px;
+            }
+
+            .cta-container {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .category-tabs {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Loading States */
+        .skeleton {
+            background: linear-gradient(90deg, var(--gray-light) 25%, var(--gray-medium) 50%, var(--gray-light) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Indicator -->
+    <div class="progress-indicator" id="progressBar"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">TechForge</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="#services" class="active">Services</a>
+                <a href="#process">Process</a>
+                <a href="#metrics">Results</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+                <div class="theme-toggle" id="themeToggle"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="animated-bg">
+            <div class="circuit-line" style="top: 20%; width: 300px;"></div>
+            <div class="circuit-line" style="top: 50%; width: 200px; animation-delay: 2s;"></div>
+            <div class="circuit-line" style="top: 80%; width: 250px; animation-delay: 4s;"></div>
+        </div>
+        <div class="hero-content">
+            <div class="breadcrumb">
+                <a href="/">Home</a>
+                <span>→</span>
+                <span>Services & Process</span>
+            </div>
+            <h1>End-to-End Tech Solutions, Tailored to Your Vision</h1>
+            <p>From initial audit to ongoing support, we're your dedicated tech partner</p>
+            <div class="quick-links">
+                <a href="#services" class="quick-link">Our Services</a>
+                <a href="#process" class="quick-link">Our Process</a>
+                <a href="#packages" class="quick-link">Service Packages</a>
+                <a href="#contact" class="quick-link">Start Your Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Our Services</h2>
+            <p>Comprehensive tech solutions for every business challenge</p>
+        </div>
+        
+        <div class="service-categories">
+            <div class="category-tabs">
+                <div class="category-tab active" data-category="digital">Digital Transformation</div>
+                <div class="category-tab" data-category="automation">Automation & Efficiency</div>
+                <div class="category-tab" data-category="ai">AI & Machine Learning</div>
+                <div class="category-tab" data-category="design">Design & UX</div>
+                <div class="category-tab" data-category="development">Development</div>
+                <div class="category-tab" data-category="devops">Infrastructure</div>
+                <div class="category-tab" data-category="consultation">Schedule a Call</div>
+            </div>
+
+            <!-- Digital Transformation -->
+            <div class="category-content active" id="digital">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🌐</div>
+                        <h3>Website Design & Development</h3>
+                        <p>Modern, responsive websites that convert visitors into customers with cutting-edge design.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $2,500</span>
+                            <span class="service-timeline">4-6 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Next.js</span>
+                            <span class="tech-badge">Tailwind</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔄</div>
+                        <h3>Legacy System Modernization</h3>
+                        <p>Transform outdated systems into modern, efficient solutions without disrupting operations.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $5,000</span>
+                            <span class="service-timeline">8-12 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Node.js</span>
+                            <span class="tech-badge">AWS</span>
+                            <span class="tech-badge">Docker</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">☁️</div>
+                        <h3>Cloud Migration Strategy</h3>
+                        <p>Seamless transition to cloud infrastructure with cost optimization and security best practices.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $3,000</span>
+                            <span class="service-timeline">6-8 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">AWS</span>
+                            <span class="tech-badge">Azure</span>
+                            <span class="tech-badge">GCP</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3>Digital Workflow Optimization</h3>
+                        <p>Streamline your business processes with digital tools and automated workflows.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $2,000</span>
+                            <span class="service-timeline">3-4 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Zapier</span>
+                            <span class="tech-badge">Make</span>
+                            <span class="tech-badge">n8n</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔗</div>
+                        <h3>API Development & Integration</h3>
+                        <p>Connect your systems and services with robust, scalable API solutions.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $1,500</span>
+                            <span class="service-timeline">2-4 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">REST</span>
+                            <span class="tech-badge">GraphQL</span>
+                            <span class="tech-badge">WebSocket</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Automation & Efficiency -->
+            <div class="category-content" id="automation">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🤖</div>
+                        <h3>Business Process Automation</h3>
+                        <p>Automate repetitive tasks and workflows to save time and reduce errors.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $2,000</span>
+                            <span class="service-timeline">3-5 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Selenium</span>
+                            <span class="tech-badge">RPA</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">⚙️</div>
+                        <h3>Robotic Process Automation</h3>
+                        <p>Deploy software robots to handle high-volume, repeatable tasks 24/7.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $3,500</span>
+                            <span class="service-timeline">4-6 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">UiPath</span>
+                            <span class="tech-badge">Automation Anywhere</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📊</div>
+                        <h3>Data Pipeline Automation</h3>
+                        <p>Build automated data pipelines for real-time analytics and reporting.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $2,500</span>
+                            <span class="service-timeline">3-4 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Apache Airflow</span>
+                            <span class="tech-badge">ETL</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📧</div>
+                        <h3>Email & Marketing Automation</h3>
+                        <p>Personalized marketing campaigns that run on autopilot.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $1,500</span>
+                            <span class="service-timeline">2-3 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">HubSpot</span>
+                            <span class="tech-badge">Mailchimp</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI & Machine Learning -->
+            <div class="category-content" id="ai">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🧠</div>
+                        <h3>GPT/LLM Implementation</h3>
+                        <p>Integrate cutting-edge language models into your applications and workflows.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $3,000</span>
+                            <span class="service-timeline">3-5 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">OpenAI</span>
+                            <span class="tech-badge">Claude</span>
+                            <span class="tech-badge">LangChain</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💬</div>
+                        <h3>Chatbot Development</h3>
+                        <p>Intelligent conversational AI that provides 24/7 customer support.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $2,500</span>
+                            <span class="service-timeline">4-6 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Dialogflow</span>
+                            <span class="tech-badge">Rasa</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📈</div>
+                        <h3>Predictive Analytics</h3>
+                        <p>Forecast trends and make data-driven decisions with ML models.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $4,000</span>
+                            <span class="service-timeline">6-8 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">TensorFlow</span>
+                            <span class="tech-badge">Scikit-learn</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">👁️</div>
+                        <h3>Computer Vision Solutions</h3>
+                        <p>Image recognition and processing for automated visual tasks.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $5,000</span>
+                            <span class="service-timeline">8-10 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">OpenCV</span>
+                            <span class="tech-badge">PyTorch</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design & UX -->
+            <div class="category-content" id="design">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <h3>UI/UX Design & Research</h3>
+                        <p>User-centered design that creates intuitive, beautiful interfaces.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $2,000</span>
+                            <span class="service-timeline">3-4 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Figma</span>
+                            <span class="tech-badge">Adobe XD</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📐</div>
+                        <h3>Design System Creation</h3>
+                        <p>Comprehensive design systems for consistent brand experiences.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $3,500</span>
+                            <span class="service-timeline">4-6 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Storybook</span>
+                            <span class="tech-badge">Style Dictionary</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📱</div>
+                        <h3>Mobile App Interface Design</h3>
+                        <p>Native and cross-platform mobile UI that users love.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $2,500</span>
+                            <span class="service-timeline">3-5 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">iOS</span>
+                            <span class="tech-badge">Android</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🚀</div>
+                        <h3>Conversion Rate Optimization</h3>
+                        <p>Data-driven design improvements to boost conversions.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $1,500</span>
+                            <span class="service-timeline">2-3 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">A/B Testing</span>
+                            <span class="tech-badge">Hotjar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Development Services -->
+            <div class="category-content" id="development">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">💻</div>
+                        <h3>Custom Software Development</h3>
+                        <p>Tailored software solutions built to your exact specifications.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $5,000</span>
+                            <span class="service-timeline">8-12 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Full-Stack</span>
+                            <span class="tech-badge">Agile</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🛒</div>
+                        <h3>E-commerce Solutions</h3>
+                        <p>Complete online stores with payment processing and inventory management.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $3,500</span>
+                            <span class="service-timeline">6-8 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Shopify</span>
+                            <span class="tech-badge">WooCommerce</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">☁️</div>
+                        <h3>SaaS Platform Development</h3>
+                        <p>Scalable software-as-a-service platforms with subscription management.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $8,000</span>
+                            <span class="service-timeline">10-14 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Multi-tenant</span>
+                            <span class="tech-badge">Stripe</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🗄️</div>
+                        <h3>Database Design & Optimization</h3>
+                        <p>Efficient database architecture for optimal performance.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $1,500</span>
+                            <span class="service-timeline">2-3 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Infrastructure & DevOps -->
+            <div class="category-content" id="devops">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3>Performance Optimization</h3>
+                        <p>Speed up your applications and reduce infrastructure costs.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $1,500</span>
+                            <span class="service-timeline">1-2 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">CDN</span>
+                            <span class="tech-badge">Caching</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔒</div>
+                        <h3>Security Audits & Hardening</h3>
+                        <p>Comprehensive security assessments and vulnerability fixes.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $2,000</span>
+                            <span class="service-timeline">2-3 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">OWASP</span>
+                            <span class="tech-badge">Penetration Testing</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📊</div>
+                        <h3>Monitoring & Alerting Systems</h3>
+                        <p>Real-time monitoring with intelligent alerting for system health.</p>
+                        <div class="service-meta">
+                            <span class="service-price">From $1,000</span>
+                            <span class="service-timeline">1-2 weeks</span>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Datadog</span>
+                            <span class="tech-badge">New Relic</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schedule a Call -->
+            <div class="category-content" id="consultation">
+                <div style="text-align: center; padding: 3rem;">
+                    <div style="max-width: 600px; margin: 0 auto;">
+                        <div class="service-icon" style="margin: 0 auto 2rem; width: 80px; height: 80px; font-size: 2rem;">📞</div>
+                        <h3 style="font-size: 2rem; margin-bottom: 1rem;">Not Sure What You Need?</h3>
+                        <p style="font-size: 1.125rem; color: var(--gray-medium); margin-bottom: 2rem;">
+                            Book a free 30-minute consultation call with our experts. We'll analyze your requirements 
+                            and recommend the perfect solution for your business.
+                        </p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+                            <div style="padding: 1rem; background: var(--gray-light); border-radius: 10px;">
+                                <strong>✓ No Obligation</strong>
+                            </div>
+                            <div style="padding: 1rem; background: var(--gray-light); border-radius: 10px;">
+                                <strong>✓ Expert Advice</strong>
+                            </div>
+                            <div style="padding: 1rem; background: var(--gray-light); border-radius: 10px;">
+                                <strong>✓ Custom Solutions</strong>
+                            </div>
+                        </div>
+                        <button class="btn-submit" style="background: linear-gradient(135deg, var(--secondary), var(--tertiary)); color: white; max-width: 300px;">
+                            Schedule Your Free Call
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Timeline -->
+    <section class="process" id="process">
+        <div class="section-header">
+            <h2>Our Process</h2>
+            <p>A proven 8-stage journey from concept to completion</p>
+        </div>
+        
+        <div class="timeline-container">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Stage 1: Initial Contact <span class="timeline-duration">0-48 hours</span></h3>
+                        <p>Your journey begins when you reach out through our website, email, or referral.</p>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Automated acknowledgment within 1 hour</li>
+                                <li>Discovery call scheduled within 24-48 hours</li>
+                                <li>Initial needs assessment questionnaire sent</li>
+                                <li>Preliminary project evaluation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-point">📧</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Stage 2: Discovery & Consultation <span class="timeline-duration">Week 1</span></h3>
+                        <p>Deep dive into your business needs and technical requirements.</p>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>60-minute discovery video call</li>
+                                <li>Technical requirements analysis</li>
+                                <li>Budget and timeline discussion</li>
+                                <li>Free mini-audit delivered</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-point">🔍</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Stage 3: Proposal & Agreement <span class="timeline-duration">Week 1-2</span></h3>
+                        <p>Detailed project proposal with transparent pricing and clear deliverables.</p>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Comprehensive project proposal</li>
+                                <li>Scope of work documentation</li>
+                                <li>Transparent pricing breakdown</li>
+                                <li>Contract negotiation & signing</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-point">📝</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Stage 4: Project Kickoff <span class="timeline-duration">Week 2</span></h3>
+                        <p>Team introductions and project initialization.</p>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Team introductions and roles</li>
+                                <li>Communication channels setup</li>
+                                <li>Project dashboard access</li>
+                                <li>Initial asset collection</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-point">🚀</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Stage 5: Development Sprints <span class="timeline-duration">Weeks 3-14</span></h3>
+                        <p>Iterative development with regular check-ins and demos.</p>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>2-week sprint cycles</li>
+                                <li>Weekly status meetings</li>
+                                <li>Regular progress demos</li>
+                                <li>Real-time project tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-point">⚙️</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Stage 6: Quality Assurance <span class="timeline-duration">Week 14-15</span></h3>
+                        <p>Comprehensive testing and optimization.</p>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Comprehensive testing suite</li>
+                                <li>Performance optimization</li>
+                                <li>Security verification</li>
+                                <li>Bug fixes and refinements</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-point">✅</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Stage 7: Deployment <span class="timeline-duration">Week 15-16</span></h3>
+                        <p>Production launch with full documentation and training.</p>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Production environment setup</li>
+                                <li>Staged rollout process</li>
+                                <li>Documentation delivery</li>
+                                <li>Launch day support</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-point">☁️</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Stage 8: Post-Launch Support <span class="timeline-duration">Ongoing</span></h3>
+                        <p>Continued partnership and support for long-term success.</p>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>30-day check-in</li>
+                                <li>Performance monitoring</li>
+                                <li>Testimonial collection</li>
+                                <li>Future enhancement planning</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-point">∞</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics" id="metrics">
+        <div class="section-header">
+            <h2>Why Our Process Works</h2>
+            <p>Numbers that speak to our commitment and expertise</p>
+        </div>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value" data-target="98">0%</div>
+                <div class="metric-label">On-Time Delivery</div>
+                <div class="metric-progress">
+                    <div class="metric-progress-bar" style="width: 98%;"></div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" data-target="4.9">0.0</div>
+                <div class="metric-label">Client Satisfaction</div>
+                <div class="metric-progress">
+                    <div class="metric-progress-bar" style="width: 98%;"></div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" data-target="85">0%</div>
+                <div class="metric-label">Repeat Clients</div>
+                <div class="metric-progress">
+                    <div class="metric-progress-bar" style="width: 85%;"></div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" data-target="24">0h</div>
+                <div class="metric-label">Response Time</div>
+                <div class="metric-progress">
+                    <div class="metric-progress-bar" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Everything you need to know about working with us</p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do you determine project pricing?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Our pricing is based on project complexity, timeline, and required expertise. We provide transparent, fixed-price quotes after our discovery call, with no hidden fees. Pricing includes all development, testing, documentation, and initial support period. We also offer flexible payment plans and can work within your budget constraints.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    What if we need changes mid-project?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        We use an agile methodology that accommodates changes. Minor adjustments within scope are handled in our regular sprint cycles at no extra cost. For significant scope changes, we provide a change request assessment with time and cost implications, ensuring you maintain control over your project and budget.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you offer emergency support?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Yes, we offer 24/7 emergency support for critical issues. All projects include a 30-day support period, and we offer ongoing maintenance packages with guaranteed response times. Emergency support ensures your business operations continue smoothly even when unexpected issues arise.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can you work with our existing team?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Absolutely! We excel at team augmentation and collaborative development. We can integrate seamlessly with your existing team, adapting to your workflows, tools, and communication preferences. We also provide knowledge transfer and documentation to ensure your team can maintain and extend the solutions we build.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    What happens after project completion?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Every project includes a 30-day support period with a scheduled check-in. We provide comprehensive documentation, training materials, and knowledge transfer. Many clients choose our ongoing support packages for continued optimization, feature additions, and technical support. We're committed to your long-term success.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do you ensure
